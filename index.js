@@ -8,6 +8,7 @@ app.get('/', (req, res) => {
 });
 
 //middleware
+app.use(express.json());
 app.use('/cargos', cargoRoutes);
 
 
