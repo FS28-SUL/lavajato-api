@@ -1,5 +1,6 @@
 import express from "express"
 import cargoRoutes from "./src/routes/cargoRoutes.js"
+import funcionarioRoutes from "./src/routes/funcionarioRoutes.js"
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.get('/', (req, res) => {
 //middleware
 app.use(express.json());
 app.use('/cargos', cargoRoutes);
+app.use('/funcionarios', funcionarioRoutes);
 
 
 
@@ -17,7 +19,7 @@ app.use('/cargos', cargoRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
-        mensagem: "pagina não encontrada"
+        mensagem: "Rota não encontrada"
     })
 });
 
