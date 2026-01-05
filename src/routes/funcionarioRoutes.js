@@ -24,8 +24,8 @@ router.post("/", async (req, res) => {
             throw new Error("Falta campos obrigatórios")
         }
 
-        const comando = await executarSQL(`insert into funcionarios (cargo_id, nome, telefone, email, turno) values (${cargo_id}, "${nome}", "${telefone}", "${email}", "${turno}");`);
-        if (comando.affectedRows > 0) {
+        const comando = await executarSQL(`insert into funcionarios (cargo_id, nome, telefone, email, turno) values (${cargo_id}, '${nome}', '${telefone}', '${email}', '${turno}');`);
+        if (comando.length == 0) {
             res.json({ mensagem: "Registro criado com sucesso!" });
         }else{
             res.json(comando);
@@ -56,8 +56,8 @@ router.put("/:id", async (req, res) => {
             funcionario.turno = turno;
         }
 
-        const comando = await executarSQL(`update funcionarios set cargo_id = ${funcionario.cargo_id}, nome = "${funcionario.nome}", telefone = "${funcionario.telefone}", email = "${funcionario.email}", turno = "${funcionario.turno}" where id = ${req.params.id};`);
-        if (comando.affectedRows > 0) {
+        const comando = await executarSQL(`update funcionarios set cargo_id = ${funcionario.cargo_id}, nome = '${funcionario.nome}', telefone = '${funcionario.telefone}', email = '${funcionario.email}', turno = '${funcionario.turno}' where id = ${req.params.id};`);
+        if (comando.length == 0) {
             res.json({ mensagem: "Registro atualizado com sucesso!" });
         } else {
             res.json(comando)
@@ -70,7 +70,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const comando = await executarSQL(`delete from funcionarios where id = ${req.params.id};`);
-        if (comando.affectedRows > 0) {
+        if (comando.length == 0) {
             res.json({ mensagem: "Registro deletado com sucesso!" });
         } else {
             res.json({ mensagem: "Linha não encontrada" })

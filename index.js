@@ -1,6 +1,7 @@
 import express from "express"
 import cargoRoutes from "./src/routes/cargoRoutes.js"
 import funcionarioRoutes from "./src/routes/funcionarioRoutes.js"
+import clienteRoutes from "./src/routes/clienteRoutes.js"
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use('/cargos', cargoRoutes);
 app.use('/funcionarios', funcionarioRoutes);
+app.use('/clientes', clienteRoutes);
 
 
 
